@@ -1,0 +1,18 @@
+---
+applications:
+ 
+- name: flota-approuter
+  buildpacks:
+  - nodejs_buildpack
+  memory: 256M
+  disk-quota: 1G
+  routes:
+  - route: flota-approuterqas.cfapps.us10.hana.ondemand.com
+  env:
+    NODE_TLS_REJECT_UNAUTHORIZED: 0
+    destinations: >
+      [
+         {"name":"flotabackend", "url" :"https://flotabackendqas.cfapps.us10.hana.ondemand.com", "forwardAuthToken": true }
+      ]
+  services:
+    - jco-xsuaa
